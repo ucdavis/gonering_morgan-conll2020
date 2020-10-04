@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587267423273.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "802C6673",
+    "lastKnownWriteTime" : 1592005512,
+    "last_content_update" : 1592008582264,
+    "path" : "~/Grad school/2019-2020/Prelim paper/Results/analysis.r",
+    "project_path" : "analysis.r",
+    "properties" : {
+        "cursorPosition" : "1046,225",
+        "scrollLine" : "1026"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
