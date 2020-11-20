@@ -1,5 +1,5 @@
 # gonering_morgan-conll2020
-All code for Gonering &amp; Morgan (2020), "Uniform processing difficulty is a poor predictor of cross-linguistic word order frequency", to be presented at CoNLL.
+All code for Gonering &amp; Morgan (2020), "Uniform processing difficulty is a poor predictor of cross-linguistic word order frequency", to be presented at CoNLL 2020.
 
 The analysis folder contains R code used to analyze the raw results from the code contained in the uid folder, including the statistical tests used in the paper and the code used to generate all figures.
 
@@ -35,12 +35,12 @@ To rerun our attempted replication of MNP (2010)'s child-directed speech results
 **Requirements**: for the code in folder *uid/Java/UD extraction*, Java 6 or higher; for the code in folder *uid/Java/WordOrder/* and in *ReformatUIDmetadata/*, Java 8 or higher; for the code in folder *analysis*, packages *tidyverse*, *ggplot*, *scales*, *gridExtra*, *ggrepel*, *eulerr*, *ggforce*, and *grid*
 
 To rerun our entropy-based UID, surprisal-based UID, and pointwise mutual information measure calculations on our subset of languages from the Universal Dependencies project, first, download *uid/Java/WordOrder*. Then, either:
-- Download the folder "UD data" from tba and extract it to the working directory of the WordOrder project; or
+- Download the folder "UD data" from https://osf.io/sy9kp/ and extract it to the working directory of the WordOrder project; or
 - Recreate the UD-derived event datasets by:
   - Downloading the UD v. 2.5 treebanks from (http://hdl.handle.net/11234/1-3105)[http://hdl.handle.net/11234/1-3105] and extracting the .zip file
   - Create a new folder called "UD data" in the working directory for the UD extraction project
   - The "UD data" folder must have subfolders for each of the 20 languages in our subset, which themselves each have a subfolder called "treebanks"
-  - Move or copy the appropriate treebanks from the unzipped UD treebanks folder, except for _ and _
+  - Move or copy the appropriate treebanks from the unzipped UD treebanks folder, except for English-Pronouns, English-GUMReddit, English-ESL, Japanese-BCCWJ, and Mbya_Guarani-Dooley
   - Navigate to the *uid/UD extraction/src/* folder and run `java Extractor.java`; when prompted, select to extract from all languages, but note that, depending on your system's resources, this can take a very long time or consume a lot of RAM - if in doubt, choose to extract a language at a time, or only a handful
   - Move the "UD data" folder to the working directory of the WordOrder project
 Then, navigate to the *ReformatUIDmetadata/src/reefer* folder and run `java Reformat.java` - this could also be done after running the WordOrder code. Finally, navigate to the WordOrder/src/wordorder/ folder and run `java GetResults.java`. When prompted, enter "ud" to run just the UD-based algorithms and select to run on all languages. Again, depending on your system's resources, this may take a long time or consume a lot of RAM, so it may be advisable to run a language or only a handful at a time. The calculation results for every utterance are written to a CSV file in a folder named "Results" in the working directory of the WordOrder project.
