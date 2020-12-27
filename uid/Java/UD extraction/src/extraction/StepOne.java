@@ -10,50 +10,41 @@ import java.util.Scanner;
 
 public class StepOne {
 	public String udDirectory = new String();
-	public String os = new String();
+	public boolean isWindows;
 	public String lang = new String();
 	public String langAbv = new String();
 	
-	public StepOne(String dataDir, String operSys) {
+	public StepOne(String dataDir, boolean isWin) {
 		this.udDirectory = dataDir;
-		this.os = operSys;
+		this.isWindows = isWin;
 	}
 	
-	public void extractAndWrite(String lg) {
+	public void extractAndWrite(String lg, String abrv) {
 		this.lang = lg;
-		this.langAbv = lg.split("_")[1];
+		this.langAbv = abrv;
 		ArrayList<ArrayList<String>> sentence = new ArrayList<>();
 		ArrayList<ArrayList<String>> lines = new ArrayList<>();
 		FileWriter fWTemp;
-		String langPath = new String();
+		String langPath = udDirectory.concat(lang).concat("/treebanks");
+		String s1Path = udDirectory.concat(lang).concat("/ud-").concat(langAbv).concat("-temp.csv");
+				
+		if(isWindows) {
+			langPath = langPath.replace("/", "\\");
+			s1Path = s1Path.replace("/", "\\");
+		}
+		
 		try {
-			if(os.equalsIgnoreCase("w") || os.equalsIgnoreCase("win") || os.equalsIgnoreCase("windows")) {
-//				fWTemp = new FileWriter(udDirectory + lang + "\\ud-" + langAbv + "-temp.csv", Charset.forName("UTF-8"));
-				fWTemp = new FileWriter(udDirectory + lang + "\\ud-" + langAbv + "-temp.csv");
-				langPath = udDirectory + lang + "\\treebanks";
-			}
-			else {
-				if(os.equalsIgnoreCase("s") || os.equalsIgnoreCase("scribe")) {
-					fWTemp = new FileWriter("/scratch/bgonerin/transitive_order_proj/UD_processing/ud-" + langAbv + "-temp.csv");
-				}
-				else {
-					fWTemp = new FileWriter(udDirectory + lang + "/ud-" + langAbv + "-temp.csv");
-				}
-				langPath = udDirectory + lang + "/treebanks";
-			}
-			
+			fWTemp = new FileWriter(s1Path);
 			fWTemp.append("subject,verb,object,order\n");
 						
 			Files.walk(Paths.get(langPath)).filter(Files::isRegularFile).forEach(f -> {
 				System.out.println(f);
 				Scanner fileScanner = null;
 				try {
-//					fileScanner = new Scanner(new FileInputStream(f.toString()), Charset.forName("UTF-8"));
 					fileScanner = new Scanner(new FileInputStream(f.toString()));
 					while(fileScanner.hasNextLine()) {
 						String line = fileScanner.nextLine();
 						
-//						if(!line.contains("#") && !line.isBlank()) {
 						if(!line.startsWith("#") && !line.isEmpty() && !Character.isWhitespace(line.charAt(0))) {
 							String[] temp = line.split("\t");
 							ArrayList<String> tempList = new ArrayList<>();
